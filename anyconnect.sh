@@ -268,9 +268,6 @@ function check_Required(){
     check_install "dig lsb_release" "dnsutils lsb-release"
     insserv -s  > /dev/null 2>&1 || ln -s /usr/lib/insserv/insserv /sbin/insserv
     print_info "Get base-tools ok"
-#only Debian 7+
-    surport_Syscodename || die "Sorry, your system is too old or has not been tested."
-    print_info "Distro ok"
 #check systemd
     ocserv_systemd="n"
     pgrep systemd-journal > /dev/null 2>&1 && ocserv_systemd="y"
@@ -499,11 +496,11 @@ function tar_ocserv_install(){
     [ "$OC_version_latest" = "" ] && {
 #可以换成自己的下载地址
         oc_version='0.10.8'
-        curl -SOL "https://raw.githubusercontent.com/squidproxy/anyconnect/master/ocserv-$oc_version.tar.xz"
+        curl -SOL "ftp://ftp.infradead.org/pub/ocserv/ocserv-$oc_version.tar.xz"
 		         
 				   
     } || {
-        wget --no-check-certificate -c https://raw.githubusercontent.com/squidproxy/anyconnect/master/ocserv-$oc_version.tar.xz
+        wget --no-check-certificate -c ftp://ftp.infradead.org/pub/ocserv/ocserv-$oc_version.tar.xz
 
     }
     tar xvf ocserv-$oc_version.tar.xz
